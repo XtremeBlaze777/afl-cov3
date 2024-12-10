@@ -1177,7 +1177,7 @@ def parse_cmdline():
             default=False)
     p.add_argument("--lcov-exclude-pattern", type=str,
             help="Set exclude pattern for lcov results",
-            default="/usr/include/\*")
+            default="/usr/include/*")
     p.add_argument("--func-search", type=str,
             help="Search for coverage of a specific function")
     p.add_argument("--line-search", type=str,
