@@ -471,9 +471,15 @@ def extract_coverage(lcov_file, log_file, cargs):
 
     ### populate old lcov output for functions/lines that were called
     ### zero times
-    with open(lcov_file, 'r') as f:
+    with open(lcov_file, 'rb') as f:
         current_file = ''
         for line in f:
+            try: 
+                line = line.decode('utf-8')
+            except UnicodeDecodeError as decode_error:
+                print(f'Warning:\n\t{decode_error}\nProceeding with execution')
+                line = line.decode('utf-8', errors='ignore')
+
             line = line.strip()
 
             m = re.search(r'SF:(\S+)', line)
@@ -512,8 +518,14 @@ def search_cov(cargs):
     id_delta_file = cargs.afl_fuzzing_dir + '/cov/id-delta-cov'
     log_file      = cargs.afl_fuzzing_dir + '/cov/afl-cov.log'
 
-    with open(id_delta_file, 'r') as f:
+    with open(id_delta_file, 'rb') as f:
         for line in f:
+            try:
+                line = line.decode('utf-8')
+            except UnicodeDecodeError as decode_error:
+                print(f'Warning:\n\t{decode_error}\nProceeding with execution')
+                line = line.decode('utf-8', errors='ignore')
+
             line = line.strip()
             ### id:NNNNNN*_file, cycle, src_file, cov_type, fcn/line\n")
             [id_file, cycle_num, src_file, cov_type, val] = line.split(', ')
@@ -674,11 +686,17 @@ def get_running_pid(stats_file, pid_re):
     pid = None
     if not os.path.exists(stats_file):
         return pid
-    with open(stats_file, 'r') as f:
+    with open(stats_file, 'rb') as f:
         for line in f:
+            try:
+                line = line.decode('utf-8')
+            except UnicodeDecodeError as decode_error:
+                print(f'Warning:\n\t{decode_error}\nProceeding with execution')
+                line = line.decode('utf-8', errors='ignore')
+
             line = line.strip()
             ### fuzzer_pid     : 13238
-            m = re.search(rpid_re, line)
+            m = re.search(rpid_re, line)  # TODO: I suspect this is a typo and it should be pid_re
             if m and m.group(1):
                 is_running = int(m.group(1))
                 try:
@@ -717,7 +735,11 @@ def run_cmd(cmd, log_file, cargs, collect):
             or collect == LOG_ERRORS:
         with open(fh.name, 'rb') as f:
             for line in f:
-                decoded_line = line.decode('utf-8', errors='ignore')
+                try:
+                    decoded_line = line.decode('utf-8')
+                except UnicodeDecodeError as decode_error:
+                    print(f'Warning:\n\t{decode_error}\nProceeding with execution')
+                    decoded_line = line.decode('utf-8', errors='ignore')
                 out.append(decoded_line.rstrip('\n'))
         os.unlink(fh.name)
 
