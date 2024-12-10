@@ -1,16 +1,13 @@
-# afl-cov3 modified for python3
-
+#!/usr/bin/env python2
 #
-#  File: afl-cov3.py
+#  File: afl-cov
 #
-#  Version: 0.6.2f (forked from 0.6.2)
+#  Version: 0.6.2
 #
 #  Purpose: Perform lcov coverage diff's against each AFL queue file to see
 #           new functions and line coverage evolve from an AFL fuzzing cycle.
-#  Purpose (fork): Convert preexisting Python2 script to Python3
 #
 #  Copyright (C) 2015-2016 Michael Rash (mbr@cipherdyne.org)
-#  Copyright (C) 2024 XtremeBlaze777
 #
 #  License (GNU General Public License version 2 or any later version):
 #
@@ -715,9 +712,10 @@ def run_cmd(cmd, log_file, cargs, collect):
 
     if cargs.disable_cmd_redirection or collect == WANT_OUTPUT \
             or collect == LOG_ERRORS:
-        with open(fh.name, 'r') as f:
+        with open(fh.name, 'rb') as f:
             for line in f:
-                out.append(line.rstrip('\n'))
+                decoded_line = line.decode('utf-8', errors='ignore')
+                out.append(decoded_line.rstrip('\n'))
         os.unlink(fh.name)
 
     if (es != 0) and (collect == LOG_ERRORS or collect == WANT_OUTPUT):
