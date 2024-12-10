@@ -1,13 +1,16 @@
-#!/usr/bin/env python2
+# afl-cov3 modified for python3
+
 #
-#  File: afl-cov
+#  File: afl-cov3.py
 #
-#  Version: 0.6.2
+#  Version: 0.6.2f (forked from 0.6.2)
 #
 #  Purpose: Perform lcov coverage diff's against each AFL queue file to see
 #           new functions and line coverage evolve from an AFL fuzzing cycle.
+#  Purpose (fork): Convert preexisting Python2 script to Python3
 #
 #  Copyright (C) 2015-2016 Michael Rash (mbr@cipherdyne.org)
+#  Copyright (C) 2024 XtremeBlaze777
 #
 #  License (GNU General Public License version 2 or any later version):
 #
