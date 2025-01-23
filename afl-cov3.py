@@ -10,7 +10,7 @@
 #  Purpose (fork): Convert preexisting Python2 script to Python3
 #
 #  Copyright (C) 2015-2016 Michael Rash (mbr@cipherdyne.org)
-#  Copyright (C) 2024 XtremeBlaze777
+#  Copyright (C) 2024-2025 XtremeBlaze777
 #
 #  License (GNU General Public License version 2 or any later version):
 #
@@ -47,7 +47,7 @@ try:
 except ImportError:
     import subprocess
 
-__version__ = '0.6.2'
+__version__ = '0.6.2f'
 
 NO_OUTPUT   = 0
 WANT_OUTPUT = 1

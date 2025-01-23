@@ -1,6 +1,5 @@
 # afl-cov3 - AFL Fuzzing Code Coverage using Python3
-afl-cov is a great tool for visualizing the coverage of your fuzzing session. However, this tool existed as a Python2 script which has long been deprecated and is a pain to build from source. Thus this fork includes `afl-cov3.py` which is a Python3 variant 
-of the afl-cov. The Python2 variant is still kept as `afl-cov`. The rest of the repo (including the remaining README) is directly from the afl-cov.
+afl-cov is a great tool for visualizing the coverage of your fuzzing session. However, this tool existed as a Python2 script even though Python2 has long been deprecated and is a pain to build from source. Thus this fork includes `afl-cov3.py` which is a Python3 variant of afl-cov. The Python2 variant is still kept as `afl-cov`. The rest of the repo (including the remaining README) is directly from the original afl-cov project.
 
 # afl-cov - AFL Fuzzing Code Coverage
 
